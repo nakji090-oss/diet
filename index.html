@@ -19,6 +19,9 @@
         
         /* 모바일 앱 느낌을 위한 전체 컨테이너 설정 */
         .app-container { max-width: 28rem; margin: 0 auto; background-color: white; min-height: 100vh; position: relative; padding-bottom: 6rem; box-shadow: 0 0 15px rgba(0,0,0,0.05); }
+        
+        /* 아이폰 하단 홈 바 영역 보호 */
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 1rem); }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -40,14 +43,12 @@
 
         <nav class="px-3 py-4 bg-slate-50 border-b border-slate-200">
             <div id="day-nav" class="flex gap-2 overflow-x-auto hide-scrollbar snap-x">
-                <!-- JS로 요일 버튼들이 생성됩니다 -->
-            </div>
+                </div>
         </nav>
 
         <main class="p-5">
             <div id="routine-content" class="fade-in">
-                <!-- JS로 선택된 요일의 루틴이 렌더링됩니다 -->
-            </div>
+                </div>
         </main>
 
         <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-md border-t border-slate-200 max-w-md mx-auto z-20 pb-safe">
@@ -61,7 +62,6 @@
 
     <script>
         // 개월차별 루틴 데이터 (실내자전거 제외, 스쿼트/푸시업 강화 버전)
-        // 동적 클래스 로딩 에러를 막기 위해 shadowColor를 명시적으로 추가했습니다.
         const allRoutines = {
             2: [
                 { day: 1, name: '월', title: '베이스 러닝 (기초)', tag: '체지방 연소', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', shadowColor: 'shadow-blue-500/30', details: ['준비: 제자리 뛰기 2분', '본운동: 슬로우 조깅 35분', '포인트: 대화가 가능할 정도의 아주 느린 속도(9~10분 페이스)를 유지하세요.'] },
@@ -101,7 +101,7 @@
                     return JSON.parse(val);
                 } catch (e) {
                     console.warn('Storage parse error, resetting data.', e);
-                    return defaultVal; // 에러 시 빈 상태로 초기화하여 튕김 방지
+                    return defaultVal; 
                 }
             },
             set(key, val) {
