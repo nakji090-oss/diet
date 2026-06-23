@@ -60,41 +60,63 @@
     </div>
 
     <script>
-        // 개월차별 루틴 데이터
+        // 개월차별 루틴 데이터 (실내자전거 제외, 스쿼트/푸시업 강화 버전)
+        // 동적 클래스 로딩 에러를 막기 위해 shadowColor를 명시적으로 추가했습니다.
         const allRoutines = {
             2: [
-                { day: 1, name: '월', title: '베이스 러닝 (기반 다지기)', tag: '체지방 연소', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', details: ['준비: 스쿼트 20개 (관절 예열)', '본운동: 슬로우 조깅 35분', '포인트: 무리하지 않고 9분~10분 페이스로 땀이 살짝 날 때까지만 뜁니다.'] },
-                { day: 2, name: '화', title: '근력 서킷 (기초)', tag: '전신 근력', color: 'bg-red-500', tagColor: 'bg-red-100 text-red-700', details: ['서킷: (스쿼트 15개 + 푸시업 7개) × 5세트 (총 스쿼트 75 / 푸시업 35)', '포인트: 세트 간 휴식은 40초 이내로 짧게 가져가며, 유산소성 심박수를 유지합니다.'] },
-                { day: 3, name: '수', title: '액티브 리커버리', tag: '회복/유지', color: 'bg-emerald-500', tagColor: 'bg-emerald-100 text-emerald-700', details: ['본운동: 아주 가벼운 슬로우 조깅 30분', '포인트: 어제의 근육통을 가볍게 뛰면서 풀어주는 회복 러닝입니다.'] },
-                { day: 4, name: '목', title: '야외 인터벌 맛보기', tag: '심폐력/애프터번', color: 'bg-orange-500', tagColor: 'bg-orange-100 text-orange-700', details: ['준비: 가벼운 조깅 5분', '본운동: (조금 빠르게 2분 달리기 + 천천히 1분 걷기) × 6세트', '포인트: 달릴 때는 평소보다 보폭을 살짝 넓혀 숨이 차오르게 뜁니다.'] },
-                { day: 5, name: '금', title: '베이스 러닝 & 템포업', tag: '복합 훈련', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', details: ['본운동: 30분 조깅 (마지막 5분은 속도를 약간 높여 템포런)', '포인트: 후반부에 심박수를 한 번 더 올려 칼로리 소모를 돕습니다.'] },
-                { day: 6, name: '토', title: '주말 롱 런 (LSD)', tag: '지구력/극한연소', color: 'bg-purple-500', tagColor: 'bg-purple-100 text-purple-700', details: ['본운동: 아주 느린 속도로 50분 연속 조깅', '포인트: 거리는 신경 쓰지 마세요. 오직 50분이라는 시간만 채웁니다.'] },
-                { day: 0, name: '일', title: '완전 휴식 (Rest Day)', tag: '보상 및 회복', color: 'bg-slate-400', tagColor: 'bg-slate-200 text-slate-700', details: ['활동: 폼롤러 하체 마사지 15분 및 스트레칭', '포인트: 잘 쉬어야 살도 잘 빠집니다. 단백질 위주의 식단을 꼭 챙기세요.'] }
+                { day: 1, name: '월', title: '베이스 러닝 (기초)', tag: '체지방 연소', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', shadowColor: 'shadow-blue-500/30', details: ['준비: 제자리 뛰기 2분', '본운동: 슬로우 조깅 35분', '포인트: 대화가 가능할 정도의 아주 느린 속도(9~10분 페이스)를 유지하세요.'] },
+                { day: 2, name: '화', title: '근력 서킷 (기초)', tag: '칼로리 폭발/근력', color: 'bg-red-500', tagColor: 'bg-red-100 text-red-700', shadowColor: 'shadow-red-500/30', details: ['서킷: (스쿼트 20개 + 푸시업 10개) × 5세트 (총 스쿼트 100 / 푸시업 50)', '포인트: 세트 간 휴식은 30~40초 이내로 짧게 가져가며, 심박수를 높게 유지합니다. 자전거를 대체하는 핵심 훈련입니다.'] },
+                { day: 3, name: '수', title: '액티브 리커버리', tag: '회복/유지', color: 'bg-emerald-500', tagColor: 'bg-emerald-100 text-emerald-700', shadowColor: 'shadow-emerald-500/30', details: ['본운동: 아주 가벼운 슬로우 조깅 30분', '포인트: 어제의 근육통을 가볍게 뛰면서 풀어주는 회복 러닝입니다.'] },
+                { day: 4, name: '목', title: '야외 인터벌 맛보기', tag: '심폐력/애프터번', color: 'bg-orange-500', tagColor: 'bg-orange-100 text-orange-700', shadowColor: 'shadow-orange-500/30', details: ['준비: 가벼운 조깅 5분', '본운동: (조금 빠르게 1분 달리기 + 천천히 1분 걷기) × 8세트', '포인트: 자전거 대신 야외에서 심박수를 폭발시키는 인터벌입니다. 달릴 때는 숨이 차오르게 뛰어주세요.'] },
+                { day: 5, name: '금', title: '베이스 러닝 & 템포업', tag: '복합 훈련', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', shadowColor: 'shadow-blue-500/30', details: ['본운동: 30분 조깅 (마지막 5분은 속도를 약간 높여 템포런)', '포인트: 후반부에 심박수를 한 번 더 올려 칼로리 소모를 돕습니다.'] },
+                { day: 6, name: '토', title: '주말 롱 런 (LSD)', tag: '지구력/극한연소', color: 'bg-purple-500', tagColor: 'bg-purple-100 text-purple-700', shadowColor: 'shadow-purple-500/30', details: ['본운동: 아주 느린 속도로 50분 연속 조깅', '포인트: 거리는 신경 쓰지 마세요. 오직 50분이라는 시간만 채웁니다. 체지방이 가장 잘 타는 구간입니다.'] },
+                { day: 0, name: '일', title: '완전 휴식 (Rest Day)', tag: '보상 및 회복', color: 'bg-slate-400', tagColor: 'bg-slate-200 text-slate-700', shadowColor: 'shadow-slate-400/30', details: ['활동: 폼롤러 마사지 및 전신 스트레칭 15분', '포인트: 잘 쉬어야 살도 잘 빠집니다. 단백질 위주의 식단을 꼭 챙기세요.'] }
             ],
             3: [
-                { day: 1, name: '월', title: '베이스 러닝 (볼륨 늘리기)', tag: '체지방 연소', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', details: ['준비: 스쿼트 20개 (관절 예열)', '본운동: 슬로우 조깅 45분', '포인트: 지난달보다 10분 연장! 페이스(8분 30초~9분) 유지하며 45분 꽉 채우기.'] },
-                { day: 2, name: '화', title: '타임어택 서킷', tag: '칼로리 폭발/근력', color: 'bg-red-500', tagColor: 'bg-red-100 text-red-700', details: ['서킷: (스쿼트 20개 + 푸시업 10개) × 5세트 (총 100 / 50 완수!)', '포인트: 세트 간 휴식 30초! 근력 운동만으로 땀이 비 오듯 쏟아지게 만듭니다.'] },
-                { day: 3, name: '수', title: '액티브 리커버리', tag: '회복/유지', color: 'bg-emerald-500', tagColor: 'bg-emerald-100 text-emerald-700', details: ['본운동: 아주 가벼운 슬로우 조깅 30분', '포인트: 어제의 피로를 풀고, 뭉친 근육을 풀어줍니다.'] },
-                { day: 4, name: '목', title: '하드 인터벌 러닝', tag: '심폐력/애프터번', color: 'bg-orange-500', tagColor: 'bg-orange-100 text-orange-700', details: ['준비: 가벼운 조깅 5분', '본운동: (빠르게 숨차게 달리기 90초 + 천천히 걷기 60초) × 6~8세트', '포인트: 휴식 단축! 숨이 턱끝까지 차올라야 지방 연소 스위치가 켜집니다.'] },
-                { day: 5, name: '금', title: '베이스 러닝 & 템포업', tag: '복합 훈련', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', details: ['본운동: 35분 달리기 (마지막 10분은 숨찰 정도로 속도 점진적 증가)', '포인트: 후반부에 속도를 올리는 지구력 스피드 훈련입니다.'] },
-                { day: 6, name: '토', title: '롱 런 (LSD 확장)', tag: '지구력/극한연소', color: 'bg-purple-500', tagColor: 'bg-purple-100 text-purple-700', details: ['본운동: 아주 느린 속도로 70분 연속 조깅', '포인트: 이번 달의 하이라이트! 체지방만 타는 마법 구간을 돌파합니다.'] },
-                { day: 0, name: '일', title: '완전 휴식 (Rest Day)', tag: '보상 및 회복', color: 'bg-slate-400', tagColor: 'bg-slate-200 text-slate-700', details: ['활동: 폼롤러 마사지 15분 및 스트레칭. 운동을 완전히 끕니다.', '포인트: 관절 회복 필수! 단백질과 탄수화물을 잘 챙겨드세요.'] }
+                { day: 1, name: '월', title: '베이스 러닝 (볼륨업)', tag: '체지방 연소', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', shadowColor: 'shadow-blue-500/30', details: ['준비: 제자리 뛰기 2분', '본운동: 슬로우 조깅 40분', '포인트: 지난달보다 달리기 시간을 연장하여 지방 연소 효율을 높입니다.'] },
+                { day: 2, name: '화', title: '타임어택 서킷', tag: '칼로리 폭발/근력', color: 'bg-red-500', tagColor: 'bg-red-100 text-red-700', shadowColor: 'shadow-red-500/30', details: ['서킷: (스쿼트 20개 + 푸시업 10개) × 5세트', '유산소: 서킷 직후 가볍게 10분 걷기 또는 조깅', '포인트: 같은 100/50개라도 세트 간 휴식 시간을 20초로 더 줄여보세요. 땀이 비 오듯 쏟아집니다.'] },
+                { day: 3, name: '수', title: '액티브 리커버리', tag: '회복/유지', color: 'bg-emerald-500', tagColor: 'bg-emerald-100 text-emerald-700', shadowColor: 'shadow-emerald-500/30', details: ['본운동: 아주 가벼운 슬로우 조깅 30분', '포인트: 어제의 피로를 풀고, 뭉친 하체 근육을 부드럽게 풀어줍니다.'] },
+                { day: 4, name: '목', title: '하드 인터벌 러닝', tag: '심폐력/애프터번', color: 'bg-orange-500', tagColor: 'bg-orange-100 text-orange-700', shadowColor: 'shadow-orange-500/30', details: ['준비: 가벼운 조깅 5분', '본운동: (빠르게 숨차게 달리기 90초 + 천천히 걷기 60초) × 6세트', '포인트: 달리는 시간을 늘리고 걷는 시간을 줄였습니다. 턱끝까지 숨이 차야 애프터번 효과가 커집니다.'] },
+                { day: 5, name: '금', title: '베이스 러닝 & 템포업', tag: '복합 훈련', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', shadowColor: 'shadow-blue-500/30', details: ['본운동: 35분 달리기 (마지막 10분은 숨찰 정도로 속도 점진적 증가)', '포인트: 후반부에 속도를 올려 심폐 한계를 자극합니다.'] },
+                { day: 6, name: '토', title: '롱 런 (LSD 확장)', tag: '지구력/극한연소', color: 'bg-purple-500', tagColor: 'bg-purple-100 text-purple-700', shadowColor: 'shadow-purple-500/30', details: ['본운동: 아주 느린 속도로 70분 연속 조깅', '포인트: 이번 달의 하이라이트! 체지방만 집중적으로 타는 마법 구간을 돌파합니다. 걷지 않고 완주하는 것이 목표입니다.'] },
+                { day: 0, name: '일', title: '완전 휴식 (Rest Day)', tag: '보상 및 회복', color: 'bg-slate-400', tagColor: 'bg-slate-200 text-slate-700', shadowColor: 'shadow-slate-400/30', details: ['활동: 폼롤러 마사지 15분 및 스트레칭. 운동을 완전히 끕니다.', '포인트: 관절 회복 필수! 단백질과 탄수화물을 잘 챙겨드세요.'] }
             ],
             4: [
-                { day: 1, name: '월', title: '베이스 러닝 (최대치)', tag: '체지방 연소', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', details: ['준비: 스쿼트 20개 (관절 예열)', '본운동: 슬로우 조깅 50분', '포인트: 이제 50분은 편안하게 뛸 수 있는 심폐력을 확인합니다.'] },
-                { day: 2, name: '화', title: '고강도 맥스 서킷', tag: '칼로리 폭발/근력', color: 'bg-red-500', tagColor: 'bg-red-100 text-red-700', details: ['서킷: (스쿼트 25개 + 푸시업 12개) × 4세트 (밀도 높이기)', '마무리: 서킷 완료 후 플랭크 1분 × 3세트', '포인트: 같은 100/50개라도 세트 수를 줄여 한 번에 몰아치는 강도를 높입니다.'] },
-                { day: 3, name: '수', title: '액티브 리커버리', tag: '회복/유지', color: 'bg-emerald-500', tagColor: 'bg-emerald-100 text-emerald-700', details: ['본운동: 가벼운 슬로우 조깅 40분', '포인트: 고강도 서킷의 피로를 러닝으로 풀어냅니다.'] },
-                { day: 4, name: '목', title: '숏 인터벌 (타바타 스타일)', tag: '심폐력/애프터번', color: 'bg-orange-500', tagColor: 'bg-orange-100 text-orange-700', details: ['준비: 가벼운 조깅 10분', '본운동: (전력 질주 60초 + 걷기 30초) × 10세트', '포인트: 회복 시간이 매우 짧습니다! 정체기를 확 뚫어내는 칼로리 폭파 루틴.'] },
-                { day: 5, name: '금', title: '스트렝스 & 조깅', tag: '복합 훈련', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', details: ['근력: 스쿼트 50개 연속 1세트 + 푸시업 25개 연속 1세트 (최대 근지구력)', '유산소: 근력 직후 30분 템포런', '포인트: 다리가 무거운 상태에서 버티며 뛰는 정신력 싸움입니다.'] },
-                { day: 6, name: '토', title: '피크 롱 런 (한계 돌파)', tag: '지구력/극한연소', color: 'bg-purple-500', tagColor: 'bg-purple-100 text-purple-700', details: ['본운동: 아주 느린 속도로 90분 연속 조깅', '포인트: 1시간 30분의 벽을 넘습니다. 이 루틴의 최종 보스격 훈련입니다.'] },
-                { day: 0, name: '일', title: '완전 휴식 (Rest Day)', tag: '보상 및 회복', color: 'bg-slate-400', tagColor: 'bg-slate-200 text-slate-700', details: ['활동: 전신 스트레칭 20분, 폼롤러 마사지', '포인트: 고생 많으셨습니다. 충분한 탄수화물로 근육 내 글리코겐을 채워주세요.'] }
+                { day: 1, name: '월', title: '베이스 러닝 (최대치)', tag: '체지방 연소', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', shadowColor: 'shadow-blue-500/30', details: ['준비: 제자리 뛰기 2분', '본운동: 슬로우 조깅 50분', '포인트: 50분을 가볍게 뛸 수 있는 놀라운 심폐력을 확인하는 날입니다.'] },
+                { day: 2, name: '화', title: '고강도 맥스 서킷', tag: '칼로리 폭발/근력', color: 'bg-red-500', tagColor: 'bg-red-100 text-red-700', shadowColor: 'shadow-red-500/30', details: ['서킷: (스쿼트 25개 + 푸시업 12개) × 4세트 (총 100/48)', '마무리: 서킷 완료 후 플랭크 1분 × 3세트', '포인트: 같은 개수라도 한 번에 하는 개수를 늘려 근지구력의 한계까지 몰아붙입니다.'] },
+                { day: 3, name: '수', title: '액티브 리커버리', tag: '회복/유지', color: 'bg-emerald-500', tagColor: 'bg-emerald-100 text-emerald-700', shadowColor: 'shadow-emerald-500/30', details: ['본운동: 가벼운 슬로우 조깅 40분', '포인트: 고강도 서킷의 뻐근한 피로를 러닝으로 털어냅니다.'] },
+                { day: 4, name: '목', title: '숏 인터벌 (타바타 스타일)', tag: '심폐력/애프터번', color: 'bg-orange-500', tagColor: 'bg-orange-100 text-orange-700', shadowColor: 'shadow-orange-500/30', details: ['준비: 가벼운 조깅 10분', '본운동: (전력 질주 60초 + 걷기 30초) × 10세트', '포인트: 회복 시간이 매우 짧습니다! 정체기를 확 뚫어내는 최강의 칼로리 폭파 루틴입니다.'] },
+                { day: 5, name: '금', title: '스트렝스 퍼스트', tag: '복합 훈련', color: 'bg-blue-500', tagColor: 'bg-blue-100 text-blue-700', shadowColor: 'shadow-blue-500/30', details: ['근력: 스쿼트 50개 연속 1세트 + 푸시업 25개 연속 1세트', '유산소: 근력 직후 30분 템포런', '포인트: 다리가 털린 상태에서 버티며 뛰는 정신력 싸움입니다.'] },
+                { day: 6, name: '토', title: '피크 롱 런 (한계 돌파)', tag: '지구력/극한연소', color: 'bg-purple-500', tagColor: 'bg-purple-100 text-purple-700', shadowColor: 'shadow-purple-500/30', details: ['본운동: 아주 느린 속도로 90분 연속 조깅', '포인트: 1시간 30분의 벽을 넘습니다. 이 루틴의 최종 보스격 훈련으로, 엄청난 성취감을 줍니다.'] },
+                { day: 0, name: '일', title: '완전 휴식 (Rest Day)', tag: '보상 및 회복', color: 'bg-slate-400', tagColor: 'bg-slate-200 text-slate-700', shadowColor: 'shadow-slate-400/30', details: ['활동: 전신 스트레칭 20분, 폼롤러 마사지', '포인트: 고생 많으셨습니다! 관절과 근육이 100% 회복될 수 있도록 푹 쉬어주세요.'] }
             ]
+        };
+
+        // 브라우저 캐시 및 로컬 스토리지 충돌로 인한 멈춤(Crash)을 완벽히 방지하는 래퍼 함수
+        const Storage = {
+            get(key, defaultVal) {
+                try {
+                    const val = localStorage.getItem(key);
+                    if (val === null || val === 'undefined') return defaultVal;
+                    return JSON.parse(val);
+                } catch (e) {
+                    console.warn('Storage parse error, resetting data.', e);
+                    return defaultVal; // 에러 시 빈 상태로 초기화하여 튕김 방지
+                }
+            },
+            set(key, val) {
+                try {
+                    localStorage.setItem(key, JSON.stringify(val));
+                } catch (e) {
+                    console.warn('Storage save error.', e);
+                }
+            }
         };
 
         // 앱 상태 관리
         let currentDayIdx = new Date().getDay(); // 0(일) ~ 6(토)
-        let selectedMonth = parseInt(localStorage.getItem('workoutMonth')) || 3;
-        let completedDays = JSON.parse(localStorage.getItem(`workoutProgress_m${selectedMonth}`)) || {};
+        let selectedMonth = parseInt(Storage.get('workoutMonth', 3)) || 3;
+        let completedDays = Storage.get(`workoutProgress_m${selectedMonth}`, {});
 
         function initApp() {
             updateTabUI(selectedMonth);
@@ -110,36 +132,43 @@
 
         function changeMonth(month) {
             selectedMonth = month;
-            localStorage.setItem('workoutMonth', month);
-            completedDays = JSON.parse(localStorage.getItem(`workoutProgress_m${month}`)) || {};
+            Storage.set('workoutMonth', month);
+            completedDays = Storage.get(`workoutProgress_m${month}`, {});
             
             updateTabUI(month);
             renderNav();
             renderContent(currentDayIdx);
 
-            if (navigator.vibrate) navigator.vibrate(20);
+            if (navigator.vibrate) {
+                try { navigator.vibrate(20); } catch(e) {}
+            }
         }
 
         function updateTabUI(month) {
             [2, 3, 4].forEach(m => {
                 const btn = document.getElementById(`tab-m${m}`);
+                if(!btn) return;
                 if (m === month) {
                     btn.className = "flex-1 py-2 text-sm font-bold rounded-lg text-slate-800 bg-white shadow-sm transition-all touch-manipulation";
                 } else {
                     btn.className = "flex-1 py-2 text-sm font-bold rounded-lg text-slate-500 transition-all touch-manipulation";
                 }
             });
-            document.getElementById('main-title').innerText = `🔥 ${month}개월차 가속 루틴`;
+            const titleEl = document.getElementById('main-title');
+            if(titleEl) titleEl.innerText = `🔥 ${month}개월차 가속 루틴`;
         }
 
         function renderNav() {
             const navContainer = document.getElementById('day-nav');
+            if(!navContainer) return;
             navContainer.innerHTML = '';
             const displayOrder = [1, 2, 3, 4, 5, 6, 0]; 
             const routineData = allRoutines[selectedMonth];
 
             displayOrder.forEach(dayVal => {
                 const dayData = routineData.find(d => d.day === dayVal);
+                if(!dayData) return;
+                
                 const isSelected = currentDayIdx === dayVal;
                 const isDone = completedDays[dayVal] === true;
 
@@ -167,15 +196,19 @@
 
         function renderContent(dayVal) {
             const content = document.getElementById('routine-content');
+            if(!content) return;
+            
             const routineData = allRoutines[selectedMonth];
             const data = routineData.find(d => d.day === dayVal);
+            if(!data) return;
+            
             const isDone = completedDays[dayVal] === true;
             const today = new Date().getDay();
 
             let html = `
                 <div class="bg-white p-6 rounded-3xl card-shadow border border-slate-100">
                     <div class="flex items-center gap-4 mb-6">
-                        <div class="day-badge ${data.color} shadow-lg shadow-${data.color.split('-')[1]}-500/30 text-xl">${data.name}</div>
+                        <div class="day-badge ${data.color} shadow-lg ${data.shadowColor} text-xl">${data.name}</div>
                         <div>
                             <span class="inline-block px-2.5 py-1 ${data.tagColor} text-xs font-bold rounded-lg mb-1">${data.tag}</span>
                             <h2 class="text-xl font-extrabold text-slate-800 leading-tight">${data.title}</h2>
@@ -214,13 +247,14 @@
 
             const doneBtn = document.getElementById('done-btn');
             const doneText = document.getElementById('done-text');
+            if(!doneBtn || !doneText) return;
             
             if (isDone) {
                 doneBtn.className = "w-full py-3.5 rounded-xl text-base font-bold transition-all flex justify-center items-center gap-2 shadow-lg active:scale-95 touch-manipulation bg-slate-100 text-slate-500 border border-slate-200";
                 doneText.innerText = "운동 완료 취소하기";
                 doneBtn.querySelector('.material-icons').innerText = "undo";
             } else {
-                doneBtn.className = `w-full py-3.5 rounded-xl text-base font-bold transition-all flex justify-center items-center gap-2 shadow-lg shadow-${data.color.split('-')[1]}-500/20 active:scale-95 touch-manipulation ${data.color} text-white`;
+                doneBtn.className = `w-full py-3.5 rounded-xl text-base font-bold transition-all flex justify-center items-center gap-2 shadow-lg ${data.shadowColor} active:scale-95 touch-manipulation ${data.color} text-white`;
                 doneText.innerText = (dayVal === today) ? "오늘 운동 완료!" : `${data.name}요일 운동 완료!`;
                 doneBtn.querySelector('.material-icons').innerText = "check_circle";
             }
@@ -232,17 +266,18 @@
             } else {
                 completedDays[currentDayIdx] = true;
             }
-            localStorage.setItem(`workoutProgress_m${selectedMonth}`, JSON.stringify(completedDays));
+            Storage.set(`workoutProgress_m${selectedMonth}`, completedDays);
             
             renderNav();
             renderContent(currentDayIdx);
             
             if (completedDays[currentDayIdx] && navigator.vibrate) {
-                navigator.vibrate([50, 50, 50]);
+                try { navigator.vibrate([50, 50, 50]); } catch(e) {}
             }
         }
 
-        window.onload = initApp;
+        // HTML DOM이 완전히 불러와진 후 스크립트를 실행하여 안전성 확보
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
